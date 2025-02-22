@@ -1,6 +1,6 @@
 # BidPlus
 
-BidPlus is a web application that allows users to place and manage bids on various items. The project is primarily built using JavaScript, with additional styling provided by CSS and HTML. The backend will be developed using Node.js and Express as part of the MERN stack.
+BidPlus is a online auction platform. It is a web application that allows users to place and manage bids on various items. The project is primarily built using JavaScript, with additional styling provided by CSS and HTML. The backend will be developed using Node.js and Express as part of the MERN stack.
 
 ## Project Structure
 
@@ -56,6 +56,3 @@ To get started with the project, follow these steps:
 ## License
 
 This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
-```
-
-You can now commit and push this updated README.md file to your repository.
