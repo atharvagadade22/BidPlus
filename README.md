@@ -17,9 +17,6 @@ The `frontend` directory contains the React-based frontend of the application, s
 
 For more details, refer to the [frontend README](frontend/README.md).
 
-### Backend
-
-(Currently, there is no specific `backend` directory mentioned. Please provide details if there is a backend setup.)
 
 ### Additional Files
 
