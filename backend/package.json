@@ -1,0 +1,21 @@
+{
+  "name": "bidplus-backend",
+  "version": "1.0.0",
+  "description": "Backend for BidPlus application",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
+    "express": "^4.17.1",
+    "mongoose": "^5.12.3"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.22"
+  },
+  "author": "Atharva Navnath Gadade",
+  "license": "MIT"
+}

@@ -8,6 +8,7 @@ import SignIn from './pages/SignIn';
 import SignUp from './pages/SignUp';
 import ForgotPassword from './pages/ForgotPassword';
 import Auctions from './pages/Auctions';
+import PostAuction from './pages/PostAuction';
 
 const App = () => {
   return (
@@ -19,6 +20,7 @@ const App = () => {
         <Route path="/signup" element={<SignUp/>} />
         <Route path="/forgot-password" element={<ForgotPassword/>} />
         <Route path='/auctions' element={<Auctions/>}/>
+        <Route path="/post-auction" element={<PostAuction />} />
       </Routes>
       <Footer />
     </Router>
