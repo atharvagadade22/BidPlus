@@ -6,7 +6,7 @@ const LandingPage = () => {
     <div className="container mt-5">
       {/* Hero Section */}
       <header className="text-center bg-light py-5 rounded shadow-sm">
-        <img src="/logo.svg" alt="BidPlus Logo" className="mb-3 logo-img" />
+        <img src="/logo.svg" alt="BidPlus Logo" className="mb-3 logo-img" width={200}/>
         <h1 className="display-4 fw-bold text-primary">Welcome to BidPlus!</h1>
         <p className="lead text-secondary">Your ultimate online auction platform.</p>
         <div className="mt-4">

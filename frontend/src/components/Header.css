@@ -1,0 +1,14 @@
+.nav-link-custom {
+  font-size: 1.2rem; /* Increase font size */
+  font-family: 'Arial', sans-serif; /* Change font family */
+  font-weight: bold; /* Make text bold */
+  color: #fff !important; /* Ensure text color is white */
+}
+
+.nav-link-custom:hover {
+  color: #ffc107 !important; /* Change color on hover */
+}
+
+.btn-warning.nav-link-custom:hover {
+  color: #000 !important; /* Change text color to black on hover for Sign Up button */
+}

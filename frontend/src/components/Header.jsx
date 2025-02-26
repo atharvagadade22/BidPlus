@@ -1,5 +1,6 @@
 import React from "react";
 import { Navbar, Nav, Container } from "react-bootstrap";
+import './Header.css'; // Import custom CSS
 
 const Header = () => {
   return (
@@ -21,7 +22,7 @@ const Header = () => {
             {/* <Nav.Link href="/contact" className="nav-link-custom">Contact</Nav.Link> */}
             <Nav.Link href="/auctions" className="nav-link-custom">Auctions</Nav.Link>
             <Nav.Link href="/signin" className="nav-link-custom">Sign In</Nav.Link>
-            <Nav.Link href="/signup" className="btn btn-warning fw-bold px-3 ms-2">Sign Up</Nav.Link>
+            <Nav.Link href="/signup" className="btn btn-warning fw-bold px-3 ms-2 nav-link-custom">Sign Up</Nav.Link>
           </Nav>
         </Navbar.Collapse>
       </Container>
