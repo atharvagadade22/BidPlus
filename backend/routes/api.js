@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
-const User = require('../models/User');
+const User = require('../models/User'); 
+const Auction = require('../models/Auction'); 
 
 // Example route
 router.get('/', (req, res) => {
@@ -52,12 +53,27 @@ router.post('/signup', async (req, res) => {
 });
 
 // New route for handling POST requests to /post-auction
-router.post('/post-auction', (req, res) => {
-  const { item, startingBid, endTime } = req.body;
+router.post('/post-auction', async (req, res) => {
+  const { itemId, item, startingBid, endTime } = req.body;
   // Process the auction data here
-  if (item && startingBid && endTime) {
-    // Save auction data (this is a placeholder)
-    res.status(200).send('Auction posted successfully');
+  if (itemId && item && startingBid && endTime) {
+    try {
+      const existingAuction = await Auction.findOne({ itemId });
+      if (existingAuction) {
+        return res.status(400).send('Auction for this item already exists');
+      }
+      const newAuction = new Auction({
+        itemId: itemId, // Assuming 'itemId' is the item ID
+        item: item, // Item name
+        startingBid: startingBid,
+        endTime: endTime,
+      });
+      await newAuction.save();
+      res.status(200).send('Auction posted successfully');
+    } catch (error) {
+      console.error('Error saving auction:', error);
+      res.status(500).send('Error saving auction');
+    }
   } else {
     res.status(400).send('Invalid auction data');
   }

@@ -2,9 +2,13 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const auctionSchema = new Schema({
-  item: {
+  itemId: {
     type: Schema.Types.ObjectId,
     ref: 'Item',
+    required: true
+  },
+  item: {
+    type: String,
     required: true
   },
   startingBid: {
@@ -23,7 +27,6 @@ const auctionSchema = new Schema({
     type: Date,
     required: true
   },
-  // Add any other fields you need to store
 }, {
   timestamps: true
 });
