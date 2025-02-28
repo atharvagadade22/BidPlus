@@ -87,6 +87,32 @@ router.post('/post-auction', auth, async (req, res) => {
   }
 });
 
+router.put('/update-auction/:id', auth, async (req, res) => {
+  const { id } = req.params;
+  const { item, startingBid, endTime } = req.body;
+
+  if (!ObjectId.isValid(id)) {
+    return res.status(400).send({ error: 'Invalid auction ID' });
+  }
+
+  try {
+    const auction = await Auction.findById(id);
+    if (!auction) {
+      return res.status(404).send('Auction not found');
+    }
+
+    if (item) auction.item = item;
+    if (startingBid) auction.startingBid = startingBid;
+    if (endTime) auction.endTime = endTime;
+
+    await auction.save();
+    res.status(200).send('Auction updated successfully');
+  } catch (error) {
+    console.error('Error updating auction:', error);
+    res.status(500).send('Error updating auction');
+  }
+});
+
 router.post('/bid/:id', async (req, res) => {
   const { id } = req.params;
   const { bidValue, bidder } = req.body;
@@ -136,6 +162,62 @@ router.get('/auctions', async (req, res) => {
   } catch (error) {
     console.error('Error fetching auctions:', error);
     res.status(500).send('Error fetching auctions');
+  }
+});
+
+router.delete('/delete-auction/:id', auth, async (req, res) => {
+  const { id } = req.params;
+
+  if (!ObjectId.isValid(id)) {
+    return res.status(400).send({ error: 'Invalid auction ID' });
+  }
+
+  try {
+    const auction = await Auction.findByIdAndDelete(id);
+    if (!auction) {
+      return res.status(404).send('Auction not found');
+    }
+    res.status(200).send('Auction deleted successfully');
+  } catch (error) {
+    console.error('Error deleting auction:', error);
+    res.status(500).send('Error deleting auction');
+  }
+});
+
+router.delete('/delete-account', auth, async (req, res) => {
+  const userId = req.user._id;
+
+  try {
+    const user = await User.findByIdAndDelete(userId);
+    if (!user) {
+      return res.status(404).send('User not found');
+    }
+    res.status(200).send('Account deleted successfully');
+  } catch (error) {
+    console.error('Error deleting account:', error);
+    res.status(500).send('Error deleting account');
+  }
+});
+
+router.put('/update-profile', auth, async (req, res) => {
+  const userId = req.user._id;
+  const { name, email, password } = req.body;
+
+  try {
+    const user = await User.findById(userId);
+    if (!user) {
+      return res.status(404).send('User not found');
+    }
+
+    if (name) user.name = name;
+    if (email) user.email = email;
+    if (password) user.password = await bcrypt.hash(password, 10);
+
+    await user.save();
+    res.status(200).send('Profile updated successfully');
+  } catch (error) {
+    console.error('Error updating profile:', error);
+    res.status(500).send('Error updating profile');
   }
 });
 
