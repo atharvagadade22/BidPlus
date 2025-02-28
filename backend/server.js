@@ -1,17 +1,23 @@
+require('dotenv').config(); // Add this line to load environment variables
 const express = require('express');
 const connectDB = require('./config/db');
 const apiRoutes = require('./routes/api');
+const mongoose = require('mongoose');
 
 const app = express();
+const port = process.env.PORT || 3000;
 
 // Connect to the database
 connectDB();
 
-// ...existing code...
+mongoose.connect(process.env.MONGO_URI, {
+  // ...existing code...
+});
+
+app.use(express.json());
 
 app.use('/api', apiRoutes);
 
-// ...existing code...
-
-const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+app.listen(port, () => {
+  console.log(`Server is running on port ${port}`);
+});

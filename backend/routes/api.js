@@ -5,6 +5,8 @@ const router = express.Router();
 const User = require('../models/User');
 const Auction = require('../models/Auction');
 const auth = require('../middleware/auth');
+const mongoose = require('mongoose');
+const ObjectId = mongoose.Types.ObjectId;
 
 // Example route
 router.get('/', (req, res) => {
@@ -57,6 +59,11 @@ router.post('/signup', async (req, res) => {
 
 router.post('/post-auction', auth, async (req, res) => {
   const { itemId, item, startingBid, endTime } = req.body;
+
+  if (!ObjectId.isValid(itemId)) {
+    return res.status(400).send({ error: 'Invalid itemId' });
+  }
+
   if (itemId && item && startingBid && endTime) {
     try {
       const existingAuction = await Auction.findOne({ itemId });

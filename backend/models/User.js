@@ -20,9 +20,6 @@ const userSchema = new Schema({
     timestamps: true,
 });
 
-// Ensure indexes are created
-userSchema.index({ email: 1 });
-
 // Hash the password before saving the user
 userSchema.pre('save', async function(next) {
     if (this.isModified('password') || this.isNew) {
