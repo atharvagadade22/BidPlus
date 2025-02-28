@@ -7,13 +7,28 @@ const SignUp = () => {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (password !== confirmPassword) {
       alert("Passwords do not match!");
       return;
     }
-    console.log("Sign Up:", { name, email, password });
+    try {
+      const response = await fetch(`${process.env.REACT_APP_API_URL}/signup`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ name, email, password }),
+      });
+      if (response.ok) {
+        alert('Sign Up successful!');
+      } else {
+        alert('Sign Up failed!');
+      }
+    } catch (error) {
+      console.error('Error during sign up:', error);
+    }
   };
 
   return (

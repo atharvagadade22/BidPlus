@@ -5,9 +5,24 @@ const SignIn = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Sign In:", { email, password });
+    try {
+      const response = await fetch(`${process.env.REACT_APP_API_URL}/signin`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email, password }),
+      });
+      if (response.ok) {
+        alert('Sign In successful!');
+      } else {
+        alert('Sign In failed!');
+      }
+    } catch (error) {
+      console.error('Error during sign in:', error);
+    }
   };
 
   return (

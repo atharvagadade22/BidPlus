@@ -21,7 +21,6 @@ For more details, refer to the [frontend README](frontend/README.md).
 
 The backend will be developed using Node.js and Express. This will include setting up routes, controllers, and models to handle various functionalities of the application.
 
-
 ### Additional Files
 
 - **README.md**: This file provides an overview of the project and its structure.
@@ -39,15 +38,45 @@ To get started with the project, follow these steps:
    ```bash
    cd BidPlus
    ```
-3. Install the necessary dependencies for the frontend:
+
+### Frontend Setup
+
+3. Navigate to the frontend directory:
    ```bash
    cd frontend
+   ```
+4. Create a `.env` file in the frontend directory and add the following:
+   ```
+   REACT_APP_API_URL=http://localhost:5000/api
+   ```
+5. Install the necessary dependencies for the frontend:
+   ```bash
    npm install
    ```
-4. Start the development server:
+6. Start the development server:
    ```bash
    npm run dev
    ```
+
+### Backend Setup
+
+7. Navigate to the backend directory:
+   ```bash
+   cd backend
+   ```
+8. Create a `.env` file in the backend directory and add the following:
+   ```
+   MONGO_URI=your_mongodb_connection_string
+   JWT_SECRET=your_jwt_secret_key
+   ```
+9. Install the necessary dependencies for the backend:
+   ```bash
+   npm install
+   ```
+10. Start the backend server:
+    ```bash
+    npm run dev
+    ```
 
 ## Contributions
 
