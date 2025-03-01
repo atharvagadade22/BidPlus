@@ -13,6 +13,32 @@ router.get('/', (req, res) => {
   res.send('API is working');
 });
 
+
+router.post('/signup', async (req, res) => {
+  const { name, email, password } = req.body;
+  if (name && email && password) {
+    if (password.length < 7) {
+      return res.status(400).json({ error: 'Password must be at least 7 characters long' });
+    }
+    try {
+      const existingUser = await User.findOne({ email });
+      if (existingUser) {
+        return res.status(400).send('User already exists');
+      }
+      const newUser = new User({ name, email, password });
+      const token = jwt.sign({ _id: newUser._id }, process.env.JWT_SECRET, { expiresIn: '1h' });
+      newUser.tokens = newUser.tokens.concat({ token });
+      await newUser.save();
+      res.status(200).send({ token });
+    } catch (error) {
+      console.error('Error saving user:', error);
+      res.status(500).send('Error saving user');
+    }
+  } else {
+    res.status(400).send('Invalid sign-up data');
+  }
+});
+
 router.post('/signin', async (req, res) => {
   const { email, password } = req.body;
   if (email && password) {
@@ -26,6 +52,8 @@ router.post('/signin', async (req, res) => {
         return res.status(400).send('Invalid email or password');
       }
       const token = jwt.sign({ _id: user._id }, process.env.JWT_SECRET, { expiresIn: '1h' });
+      user.tokens = user.tokens.concat({ token });
+      await user.save();
       res.status(200).send({ token });
     } catch (error) {
       console.error('Error during sign-in:', error);
@@ -33,27 +61,6 @@ router.post('/signin', async (req, res) => {
     }
   } else {
     res.status(400).send('Invalid sign-in data');
-  }
-});
-
-router.post('/signup', async (req, res) => {
-  const { name, email, password } = req.body;
-  if (name && email && password) {
-    try {
-      const existingUser = await User.findOne({ email });
-      if (existingUser) {
-        return res.status(400).send('User already exists');
-      }
-      const newUser = new User({ name, email, password });
-      await newUser.save();
-      const token = jwt.sign({ _id: newUser._id }, process.env.JWT_SECRET, { expiresIn: '1h' });
-      res.status(200).send({ token });
-    } catch (error) {
-      console.error('Error saving user:', error);
-      res.status(500).send('Error saving user');
-    }
-  } else {
-    res.status(400).send('Invalid sign-up data');
   }
 });
 
@@ -113,7 +120,7 @@ router.put('/update-auction/:id', auth, async (req, res) => {
   }
 });
 
-router.post('/bid/:id', async (req, res) => {
+router.post('/bid/:id', auth, async (req, res) => {
   const { id } = req.params;
   const { bidValue, bidder } = req.body;
 
@@ -201,7 +208,7 @@ router.delete('/delete-account', auth, async (req, res) => {
 
 router.put('/update-profile', auth, async (req, res) => {
   const userId = req.user._id;
-  const { name, password } = req.body;
+  const { name, email, password } = req.body;
 
   try {
     const user = await User.findById(userId);
@@ -210,6 +217,7 @@ router.put('/update-profile', auth, async (req, res) => {
     }
 
     if (name) user.name = name;
+    if (email) user.email = email;
     if (password) user.password = await bcrypt.hash(password, 10);
 
     await user.save();
