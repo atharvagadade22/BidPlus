@@ -1,4 +1,4 @@
-require('dotenv').config(); // Add this line to load environment variables
+require('dotenv').config();
 const express = require('express');
 const connectDB = require('./config/db');
 const apiRoutes = require('./routes/api');

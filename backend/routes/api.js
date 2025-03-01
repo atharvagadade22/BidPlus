@@ -201,7 +201,7 @@ router.delete('/delete-account', auth, async (req, res) => {
 
 router.put('/update-profile', auth, async (req, res) => {
   const userId = req.user._id;
-  const { name, email, password } = req.body;
+  const { name, password } = req.body;
 
   try {
     const user = await User.findById(userId);
@@ -210,7 +210,6 @@ router.put('/update-profile', auth, async (req, res) => {
     }
 
     if (name) user.name = name;
-    if (email) user.email = email;
     if (password) user.password = await bcrypt.hash(password, 10);
 
     await user.save();
