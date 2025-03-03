@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import AuctionList from '../components/AuctionList';
-import 'bootstrap/dist/css/bootstrap.min.css'; // Add Bootstrap CSS
+import 'bootstrap/dist/css/bootstrap.min.css'; 
 
 const Auctions = () => {
   const [auctions, setAuctions] = useState([]);
