@@ -2,8 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Navbar, Nav, Container, Button } from "react-bootstrap";
 import { useNavigate } from 'react-router-dom';
 import axios from "axios";
-import '../styles/Header.css';
-
+import "../styles/Header.css";
 const Header = ({ isLoggedIn, setIsLoggedIn }) => {
   const navigate = useNavigate();
   const [profileImage, setProfileImage] = useState(null);
@@ -38,10 +37,10 @@ const Header = ({ isLoggedIn, setIsLoggedIn }) => {
 
   return (
     <Navbar expand="lg" className="navbar shadow-sm py-2" variant="light">
-      <Container fluid className="px-3">
+      <Container className="px-4">
         <div className="d-flex justify-content-between align-items-center w-100">
           <Navbar.Brand href="/" className="me-0">
-            <img src="/logo.svg" alt="BidPlus Logo" className="logo-img" style={{ maxHeight: '40px' }}/>
+            <img src="/logo2.svg" alt="BidPlus Logo" className="logo-img" style={{ maxHeight: '40px' }}/>
           </Navbar.Brand>
           
           {isLoggedIn && (

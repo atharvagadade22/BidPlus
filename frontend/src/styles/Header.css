@@ -6,6 +6,13 @@
   background: linear-gradient(135deg, #6a11cb 0%, #8e44ad 100%);
   padding: 0.75rem 0;
   transition: all 0.3s ease;
+  max-width: 100%;
+  width: 100%;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 .navbar-brand {
@@ -38,7 +45,7 @@
   height: 2px;
   bottom: -2px;
   left: 50%;
-  background: #silver;
+  background: #C0C0C0;
   transition: all 0.3s ease;
   transform: translateX(-50%);
 }

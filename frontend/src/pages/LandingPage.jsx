@@ -51,7 +51,7 @@ const LandingPage = () => {
     <div className="container mt-5">
       {!isLoggedIn ? (
         <header className="text-center bg-light py-5 rounded shadow-sm landing-header">
-          <img src="/logo.svg" alt="BidPlus Logo" className="mb-3 logo-img" width={200}/>
+          <img src="/logo2.svg" alt="BidPlus Logo" className="mb-3 logo-img" width={200}/>
           <h1 className="display-4 fw-bold text-primary">Welcome to BidPlus!</h1>
           <p className="lead text-secondary">Your ultimate online auction platform.</p>
           <div className="mt-4">
