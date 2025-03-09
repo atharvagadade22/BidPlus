@@ -1,95 +1,43 @@
-/* Root container */
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
+header {
+  background-color: #ffffff;
+  color: #2c3e50;
+  padding: 1.5rem;
   text-align: center;
-  background-color: #f5f5f5;
-  color: #333;
-  font-family: 'Poppins', sans-serif;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  border-bottom: 3px solid #3498db;
 }
 
-/* Logo Styling */
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms, transform 300ms ease-in-out;
+footer {
+  background-color: #2c3e50;
+  color: #ffffff;
+  padding: 1.5rem;
+  text-align: center;
+  border-top: 3px solid #3498db;
 }
 
-.logo:hover {
-  filter: drop-shadow(0 0 2em #0056b3aa);
-  transform: scale(1.1);
-}
-
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
-}
-
-/* Logo Animation */
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
-}
-
-/* Card Layout */
 .card {
-  padding: 2em;
-  background: #ffffff;
-  border-radius: 12px;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+  border: 1px solid #e1e1e1;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+  background-color: #ffffff;
+  padding: 1rem;
+  margin-bottom: 1rem;
 }
 
 .card:hover {
   transform: translateY(-5px);
-  box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
 }
 
-/* Button Styling */
-.button {
-  display: inline-block;
-  padding: 12px 24px;
-  border: none;
-  border-radius: 8px;
-  font-size: 1rem;
+.card-title {
+  color: #2c3e50;
   font-weight: 600;
-  cursor: pointer;
-  transition: all 0.3s ease-in-out;
-  text-transform: uppercase;
+  font-size: 1.25rem;
+  margin-bottom: 0.75rem;
 }
 
-.button.primary {
-  background-color: #0056b3;
-  color: white;
-}
-
-.button.primary:hover {
-  background-color: #003d80;
-}
-
-.button.secondary {
-  background-color: #ff6600;
-  color: white;
-}
-
-.button.secondary:hover {
-  background-color: #cc5200;
-}
-
-/* Read the docs */
-.read-the-docs {
-  color: #666;
-  font-size: 0.9rem;
-  margin-top: 1rem;
+.card-text {
+  color: #505050;
+  line-height: 1.6;
 }

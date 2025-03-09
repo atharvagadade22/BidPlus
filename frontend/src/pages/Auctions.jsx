@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import AuctionList from '../components/AuctionList';
+import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css'; 
 
 const Auctions = () => {
   const [auctions, setAuctions] = useState([]);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [bidAmount, setBidAmount] = useState('');
+  const [selectedAuction, setSelectedAuction] = useState(null);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -20,9 +23,8 @@ const Auctions = () => {
     // Fetch auctions data from API
     const fetchAuctions = async () => {
       try {
-        const response = await fetch('http://localhost:5000/api/auctions');
-        const data = await response.json();
-        setAuctions(data);
+        const response = await axios.get(`${process.env.REACT_APP_API_URL}/api/auctions`);
+        setAuctions(response.data);
       } catch (error) {
         console.error('Error fetching auctions:', error);
       }
@@ -31,15 +33,60 @@ const Auctions = () => {
     fetchAuctions();
   }, []);
 
-  const handleBid = (auctionId) => {
-    if (isLoggedIn) {
-      // Implement bid logic here, e.g., navigate to bid page or open a modal
-      console.log(`Bidding on auction ${auctionId}`);
-      // For example, you can navigate to a bidding page:
-      navigate(`/auction/${auctionId}`);
-    } else {
-      alert('Please sign in to bid on this auction.');
-      navigate('/login');
+  const handleBid = async (auctionId) => {
+    if (!isLoggedIn) {
+      alert('Please sign in to place a bid');
+      navigate('/signin');
+      return;
+    }
+
+    const auction = auctions.find(a => a._id === auctionId);
+    if (!auction) return;
+
+    const amount = prompt(`Please enter bid amount (Current bid: $${auction.currentBid}):`);
+    if (!amount) return;
+
+    const bidValue = parseFloat(amount);
+    if (isNaN(bidValue)) {
+      alert('Please enter a valid amount');
+      return;
+    }
+
+    if (bidValue <= auction.currentBid) {
+      alert('Bid amount must be greater than current bid');
+      return;
+    }
+
+    try {
+      const token = localStorage.getItem('token');
+      const userName = localStorage.getItem('userName');
+      
+      if (!userName) {
+        alert('User information not found. Please sign in again.');
+        navigate('/signin');
+        return;
+      }
+
+      const response = await axios.post(
+        `${process.env.REACT_APP_API_URL}/api/bid/${auctionId}`,
+        {
+          bidValue: bidValue,
+          bidder: userName
+        },
+        {
+          headers: { Authorization: `Bearer ${token}` }
+        }
+      );
+
+      if (response.status === 200) {
+        // Refresh auctions list
+        const updatedResponse = await axios.get(`${process.env.REACT_APP_API_URL}/api/auctions`);
+        setAuctions(updatedResponse.data);
+        alert('Bid placed successfully!');
+      }
+    } catch (error) {
+      console.error('Error placing bid:', error);
+      alert('Error placing bid. Please try again.');
     }
   };
 
@@ -53,7 +100,7 @@ const Auctions = () => {
   };
 
   return (
-    <div className="container-fluid" style={{ backgroundImage: 'url(/path/to/your/image.jpg)', backgroundSize: 'cover', minHeight: '100vh' }}>
+    <div className="container-fluid">
       <div className="auctions-header text-center py-4">
         <h1>Auctions</h1>
         {isLoggedIn && (

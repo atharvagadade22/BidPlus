@@ -20,6 +20,10 @@ const userSchema = new mongoose.Schema({
     minlength: 7,
     trim: true,
   },
+  profileImage: {
+    type: String,
+    trim: true,
+  },
   tokens: [{
     token: {
       type: String,

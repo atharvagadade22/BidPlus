@@ -2,11 +2,6 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const auctionSchema = new Schema({
-  itemId: {
-    type: Schema.Types.ObjectId,
-    ref: 'Item',
-    required: true
-  },
   item: {
     type: String,
     required: true
@@ -27,6 +22,10 @@ const auctionSchema = new Schema({
     type: Date,
     required: true
   },
+  image: {
+    type: String,
+    default: null
+  }
 }, {
   timestamps: true
 });

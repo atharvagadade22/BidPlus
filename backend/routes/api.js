@@ -7,12 +7,13 @@ const Auction = require('../models/Auction');
 const auth = require('../middleware/auth');
 const mongoose = require('mongoose');
 const ObjectId = mongoose.Types.ObjectId;
+const multer = require('multer');
+const upload = multer({ dest: 'uploads/' });
 
 // Example route
 router.get('/', (req, res) => {
   res.send('API is working');
 });
-
 
 router.post('/signup', async (req, res) => {
   const { name, email, password } = req.body;
@@ -54,7 +55,7 @@ router.post('/signin', async (req, res) => {
       const token = jwt.sign({ _id: user._id }, process.env.JWT_SECRET, { expiresIn: '1h' });
       user.tokens = user.tokens.concat({ token });
       await user.save();
-      res.status(200).send({ token });
+      res.status(200).send({ token, userName: user.name });
     } catch (error) {
       console.error('Error during sign-in:', error);
       res.status(500).send('Error during sign-in');
@@ -64,24 +65,18 @@ router.post('/signin', async (req, res) => {
   }
 });
 
-router.post('/post-auction', auth, async (req, res) => {
-  const { itemId, item, startingBid, endTime } = req.body;
+router.post('/post-auction', auth, upload.single('image'), async (req, res) => {
+  const { item, startingBid, endTime } = req.body;
+  const imagePath = req.file ? 'uploads/' + req.file.filename : null;
 
-  if (!ObjectId.isValid(itemId)) {
-    return res.status(400).send({ error: 'Invalid itemId' });
-  }
-
-  if (itemId && item && startingBid && endTime) {
+  if (item && startingBid && endTime) {
     try {
-      const existingAuction = await Auction.findOne({ itemId });
-      if (existingAuction) {
-        return res.status(400).send('Auction for this item already exists');
-      }
       const newAuction = new Auction({
-        itemId: itemId,
         item: item,
         startingBid: startingBid,
+        currentBid: startingBid,
         endTime: endTime,
+        image: imagePath 
       });
       await newAuction.save();
       res.status(200).send('Auction posted successfully');
@@ -172,6 +167,17 @@ router.get('/auctions', async (req, res) => {
   }
 });
 
+router.get('/auctions/random', async (req, res) => {
+  try {
+    const count = parseInt(req.query.count) || 3;
+    const auctions = await Auction.aggregate([{ $sample: { size: count } }]);
+    res.json(auctions);
+  } catch (error) {
+    console.error("Error fetching random auctions:", error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
+
 router.delete('/delete-auction/:id', auth, async (req, res) => {
   const { id } = req.params;
 
@@ -206,9 +212,10 @@ router.delete('/delete-account', auth, async (req, res) => {
   }
 });
 
-router.put('/update-profile', auth, async (req, res) => {
+router.put('/update-profile', auth, upload.single('image'), async (req, res) => {
   const userId = req.user._id;
   const { name, email, password } = req.body;
+  const profileImage = req.file ? req.file.path : null;
 
   try {
     const user = await User.findById(userId);
@@ -218,13 +225,54 @@ router.put('/update-profile', auth, async (req, res) => {
 
     if (name) user.name = name;
     if (email) user.email = email;
-    if (password) user.password = await bcrypt.hash(password, 10);
+    if (profileImage) user.profileImage = profileImage;
 
     await user.save();
     res.status(200).send('Profile updated successfully');
   } catch (error) {
     console.error('Error updating profile:', error);
     res.status(500).send('Error updating profile');
+  }
+});
+
+// Route to fetch logged-in user's details
+router.get('/users/me', auth, async (req, res) => {
+  try {
+    const user = await User.findById(req.user._id).select('-password -tokens');
+    if (!user) {
+      return res.status(404).send('User not found');
+    }
+    res.status(200).json(user);
+  } catch (error) {
+    console.error('Error fetching user details:', error);
+    res.status(500).send('Error fetching user details');
+  }
+});
+
+router.put('/update-password', auth, async (req, res) => {
+  const { currentPassword, newPassword } = req.body;
+  const userId = req.user._id;
+
+  try {
+    const user = await User.findById(userId);
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+    // Verify current password
+    const isMatch = await bcrypt.compare(currentPassword, user.password);
+    if (!isMatch) {
+      return res.status(400).json({ message: 'Current password is wrong' });
+    }
+
+    // Hash new password and update
+    user.password = newPassword; // mongoose middleware will hash this
+    await user.save();
+
+    res.status(200).json({ message: 'Password changed successfully' });
+  } catch (error) {
+    console.error('Error updating password:', error);
+    res.status(500).json({ message: 'Error occured during updating password' });
   }
 });
 
