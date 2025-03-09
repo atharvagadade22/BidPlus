@@ -1,6 +1,6 @@
 # BidPlus
 
-BidPlus is an online auction platform developed by atharvagadade22. It is a web application that allows users to place and manage bids on various items. The project features a React-based frontend configured with Vite, and the backend is implemented using Node.js and Express as part of the MERN stack.
+BidPlus is a web application that allows users to place and manage bids on various items. The project features a React-based frontend configured with Vite, and the backend is implemented using Node.js and Express as part of the MERN stack.
 
 ## Project Structure
 
