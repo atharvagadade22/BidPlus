@@ -1,0 +1,118 @@
+/* Google Fonts Import */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Poppins:wght@300;400;500&display=swap');
+
+/* Main Container Styles */
+.container-fluid {
+  background: linear-gradient(135deg, #f5f5f5 0%, #e6e6fa 100%);
+  min-height: 100vh;
+  padding: 2rem 1rem;
+}
+
+/* Header Styles */
+.auctions-header {
+  font-family: 'Playfair Display', serif;
+  margin-bottom: 3rem;
+}
+
+.auctions-header h1 {
+  color: #4a154b;
+  font-weight: 700;
+  font-size: 3rem;
+  margin-bottom: 1.5rem;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Button Styles */
+.btn-primary {
+  background: linear-gradient(45deg, #6a3093, #a044ff);
+  border: none;
+  padding: 0.8rem 2rem;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(106, 48, 147, 0.2);
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(106, 48, 147, 0.3);
+  background: linear-gradient(45deg, #7b3aa7, #b355ff);
+}
+
+/* Alert Box Styles */
+.alert-info {
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid #e6e6fa;
+  border-radius: 10px;
+  font-family: 'Poppins', sans-serif;
+  padding: 1.5rem;
+  margin: 2rem auto;
+  max-width: 800px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+}
+
+/* Auction List Styles */
+.auction-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 2rem;
+  padding: 1rem;
+}
+
+.auction-card {
+  background: white;
+  border-radius: 15px;
+  padding: 1.5rem;
+  transition: transform 0.3s ease;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+  font-family: 'Poppins', sans-serif;
+}
+
+.auction-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+}
+
+.auction-title {
+  font-family: 'Playfair Display', serif;
+  color: #4a154b;
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.auction-details {
+  color: #666;
+  font-size: 0.9rem;
+  line-height: 1.6;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+  .auctions-header h1 {
+    font-size: 2.5rem;
+  }
+  
+  .container-fluid {
+    padding: 1rem 0.5rem;
+  }
+  
+  .auction-list {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Animation Keyframes */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.auction-card {
+  animation: fadeIn 0.5s ease-out forwards;
+} 

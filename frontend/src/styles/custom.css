@@ -1,0 +1,124 @@
+/* Google Fonts Import */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Poppins:wght@300;400;500;600&display=swap');
+
+/* Global Styles */
+:root {
+  --primary-purple: #6a1b9a;
+  --secondary-purple: #9c27b0;
+  --silver: #f5f5f5;
+  --silver-dark: #e0e0e0;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(135deg, var(--silver) 0%, #ffffff 100%);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Playfair Display', serif;
+}
+
+/* Auction Card Styles */
+.auction-card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border: none;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.auction-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(106, 27, 154, 0.2) !important;
+}
+
+.auction-card .card-img-top {
+  transition: transform 0.5s ease;
+}
+
+.auction-card:hover .card-img-top {
+  transform: scale(1.05);
+}
+
+.auction-card .card-body {
+  padding: 1.5rem;
+}
+
+.card-title {
+  color: var(--primary-purple) !important;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+/* Button Styles */
+.btn {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 500;
+  padding: 0.5rem 1.5rem;
+  border-radius: 25px;
+  transition: all 0.3s ease;
+}
+
+.btn-success {
+  background: linear-gradient(45deg, var(--primary-purple), var(--secondary-purple));
+  border: none;
+  box-shadow: 0 4px 15px rgba(106, 27, 154, 0.2);
+}
+
+.btn-success:hover {
+  background: linear-gradient(45deg, var(--secondary-purple), var(--primary-purple));
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(106, 27, 154, 0.3);
+}
+
+.btn-warning {
+  background: linear-gradient(45deg, #ffd700, #ffa000);
+  border: none;
+  color: #000;
+  box-shadow: 0 4px 15px rgba(255, 215, 0, 0.2);
+}
+
+.btn-warning:hover {
+  background: linear-gradient(45deg, #ffa000, #ffd700);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(255, 215, 0, 0.3);
+}
+
+/* Text Styles */
+.card-text {
+  color: #666;
+  margin-bottom: 0.5rem;
+  font-size: 0.95rem;
+}
+
+small {
+  color: #888;
+  font-size: 0.85rem;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+  .auction-card {
+    margin-bottom: 2rem;
+  }
+  
+  .btn {
+    width: 100%;
+    margin-bottom: 0.5rem;
+  }
+}
+
+/* Animation Classes */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.auction-card {
+  animation: fadeIn 0.6s ease-out;
+} 

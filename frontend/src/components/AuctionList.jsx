@@ -1,6 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import 'bootstrap/dist/css/bootstrap.min.css'; 
+import 'bootstrap/dist/css/bootstrap.min.css';
+import '../styles/custom.css';
+
 const AuctionList = ({ auctions, handleBid, isLoggedIn }) => {
   return (
     <section className="mt-5">
@@ -23,7 +25,7 @@ const AuctionList = ({ auctions, handleBid, isLoggedIn }) => {
                   <h5 className="card-title text-primary fw-bold">{auction.item}</h5>
                   <p className="card-text">Starting Bid: ${auction.startingBid}</p>
                   <p className="card-text">Current Bid: ${auction.currentBid}</p>                  
-                  <p className="card-text">Highest Bidder: {auction.highestBidder || 'Be first to bid'}</p>
+                  <p className="card-text">Highest Bidder: {auction.highestBidder || 'No bids yet'}</p>
                   <small>End Time: {new Date(auction.endTime).toLocaleString()}</small>
                   <br />
                   <Link to={`/auction/${auction._id}`} className="btn btn-success mt-2">View Auction</Link>

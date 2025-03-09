@@ -1,0 +1,160 @@
+/* Google Fonts Import */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Poppins:wght@300;400;500;600&display=swap');
+
+/* Custom Variables */
+:root {
+  --primary-purple: #6a1b9a;
+  --secondary-purple: #9c27b0;
+  --silver: #f5f5f5;
+  --silver-dark: #e0e0e0;
+  --gradient-bg: linear-gradient(135deg, var(--primary-purple), var(--secondary-purple));
+}
+
+/* General Styles */
+.post-auction-container {
+  font-family: 'Poppins', sans-serif;
+  padding: 2rem 0;
+  background: linear-gradient(135deg, #f8f9fa, var(--silver));
+  min-height: 100vh;
+}
+
+/* Logo Styles */
+.logo-container {
+  transform: scale(1);
+  transition: transform 0.3s ease;
+}
+
+.logo-container:hover {
+  transform: scale(1.05);
+}
+
+/* Card Styles */
+.post-auction-card {
+  border: none;
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(106, 27, 154, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.post-auction-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 40px rgba(106, 27, 154, 0.2);
+}
+
+/* Card Header */
+.post-auction-header {
+  background: var(--gradient-bg) !important;
+  padding: 1.5rem !important;
+}
+
+.post-auction-header h2 {
+  font-family: 'Playfair Display', serif;
+  font-weight: 600;
+  font-size: 2rem;
+  margin: 0;
+  color: white;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* Form Elements */
+.form-label {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.1rem;
+  color: var(--primary-purple);
+  margin-bottom: 0.5rem;
+}
+
+.form-control {
+  border: 2px solid var(--silver-dark);
+  border-radius: 8px;
+  padding: 0.8rem;
+  transition: all 0.3s ease;
+}
+
+.form-control:focus {
+  border-color: var(--secondary-purple);
+  box-shadow: 0 0 0 0.2rem rgba(156, 39, 176, 0.25);
+}
+
+/* Input Group */
+.input-group-text {
+  background: var(--gradient-bg);
+  color: white;
+  border: none;
+  font-weight: 500;
+}
+
+/* File Input */
+input[type="file"] {
+  padding: 0.5rem;
+  background: white;
+}
+
+input[type="file"]::-webkit-file-upload-button {
+  background: var(--gradient-bg);
+  border: none;
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+/* Submit Button */
+.btn-primary {
+  background: var(--gradient-bg) !important;
+  border: none !important;
+  padding: 1rem 2rem !important;
+  font-weight: 500 !important;
+  letter-spacing: 0.5px;
+  transition: all 0.3s ease !important;
+}
+
+.btn-primary:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(106, 27, 154, 0.3);
+}
+
+.btn-primary:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+/* Loading Spinner */
+.spinner-border {
+  width: 1.2rem;
+  height: 1.2rem;
+  border-width: 0.2em;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .post-auction-header h2 {
+    font-size: 1.5rem;
+  }
+  
+  .form-label {
+    font-size: 1rem;
+  }
+  
+  .btn-primary {
+    padding: 0.8rem 1.5rem !important;
+  }
+}
+
+/* Animation Classes */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.card {
+  animation: fadeIn 0.5s ease-out;
+} 

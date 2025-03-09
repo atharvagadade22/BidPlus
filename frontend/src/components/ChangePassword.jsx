@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import '../styles/custom.css';
 
 const ChangePassword = ({ onClose }) => {
   const [formData, setFormData] = useState({

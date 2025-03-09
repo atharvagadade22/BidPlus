@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { FaCog } from 'react-icons/fa';
 import ChangePassword from '../components/ChangePassword';
+import '../styles/Profile.css';
 
 const Profile = () => {
   const [user, setUser] = useState({});
@@ -68,18 +69,18 @@ const Profile = () => {
   };
 
   return (
-    <div className="container py-5">
+    <div className="profile-container">
       <div className="position-relative mb-4">
-        <h2 className="text-center mb-4">Profile</h2>
+        <h2 className="profile-heading text-center mb-4">Profile</h2>
         <div className="position-absolute top-0 end-0">
           <button 
-            className="btn btn-link" 
+            className="btn btn-link settings-button" 
             onClick={() => setShowDropdown(!showDropdown)}
           >
             <FaCog size={24} />
           </button>
           {showDropdown && (
-            <div className="dropdown-menu show position-absolute end-0">
+            <div className="dropdown-menu show position-absolute end-0 profile-dropdown">
               <button className="dropdown-item" onClick={() => document.getElementById('profileForm').classList.toggle('d-none')}>
                 Edit profile
               </button>
@@ -96,19 +97,19 @@ const Profile = () => {
 
       <div className="row justify-content-center">
         <div className="col-md-8">
-          <div className="card shadow">
+          <div className="profile-card">
             <div className="card-body text-center">
-              <div className="mb-4">
+              <div className="profile-image-container">
                 {user.profileImage ? (
                   <img
                     src={`${process.env.REACT_APP_API_URL}/${user.profileImage}`}
                     alt="Profile"
-                    className="rounded-circle"
+                    className="rounded-circle profile-image"
                     style={{ width: '150px', height: '150px', objectFit: 'cover' }}
                   />
                 ) : (
                   <div 
-                    className="rounded-circle bg-secondary d-flex align-items-center justify-content-center mx-auto"
+                    className="rounded-circle profile-image bg-secondary d-flex align-items-center justify-content-center mx-auto"
                     style={{ width: '150px', height: '150px' }}
                   >
                     <span className="text-white h1">{user.name?.charAt(0)}</span>
@@ -118,7 +119,7 @@ const Profile = () => {
               <h2 className="fw-bold mb-3">{user.name}</h2>
               <p className="text-muted mb-4">{user.email}</p>
 
-              <form id="profileForm" className="d-none">
+              <form id="profileForm" className="profile-form d-none">
                 <div className="mb-3">
                   <label className="form-label">Name</label>
                   <input
@@ -145,8 +146,8 @@ const Profile = () => {
                     onChange={handleImageChange}
                   />
                 </div>
-                <button type="button" className="btn btn-primary" onClick={handleSave}>
-                  save
+                <button type="button" className="profile-btn" onClick={handleSave}>
+                  Save Changes
                 </button>
               </form>
             </div>

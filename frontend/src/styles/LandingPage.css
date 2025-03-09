@@ -1,69 +1,173 @@
+/* Google Fonts Import */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Poppins:wght@300;400;500;600&display=swap');
+
+/* Custom Variables */
+:root {
+  --primary-purple: #6a1b9a;
+  --secondary-purple: #9c27b0;
+  --light-silver: #f5f5f5;
+  --dark-silver: #757575;
+  --gradient-bg: linear-gradient(135deg, var(--primary-purple), var(--secondary-purple));
+}
+
+/* Global Styles */
 .landing-header {
-    background: linear-gradient(to right, #f8f9fa, #e9ecef);
-    border-radius: 15px;
-    padding: 3rem 1rem;
-    margin-bottom: 2rem;
+  background: linear-gradient(to right bottom, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.7));
+  backdrop-filter: blur(10px);
+  border-radius: 20px;
+  padding: 3rem !important;
+  margin-bottom: 4rem;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  transition: transform 0.3s ease;
 }
 
-.logo-img {
-    filter: drop-shadow(0 0 5px rgba(0,0,0,0.1));
-    transition: transform 0.3s ease;
+.landing-header:hover {
+  transform: translateY(-5px);
 }
 
-.logo-img:hover {
-    transform: scale(1.05);
-}
-
-.auction-card {
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    border-radius: 12px;
-    overflow: hidden;
-    border: none;
-}
-
-.auction-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 20px rgba(0,0,0,0.1) !important;
-}
-
-.auction-card .card-img-top {
-    transition: transform 0.3s ease;
-}
-
-.auction-card:hover .card-img-top {
-    transform: scale(1.05);
-}
-
-.auction-card .card-body {
-    padding: 1.5rem;
-}
-
-.btn {
-    transition: all 0.3s ease;
-    padding: 0.5rem 1.5rem;
-    border-radius: 25px;
-}
-
-.btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-}
-
-.btn-warning {
-    background-color: #ffc107;
-    border: none;
-}
-
-.btn-success {
-    background-color: #28a745;
-    border: none;
-}
-
-.text-primary {
-    color: #0d6efd !important;
+/* Typography */
+h1.display-4 {
+  font-family: 'Playfair Display', serif;
+  font-weight: 700;
+  background: var(--gradient-bg);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  margin-bottom: 1.5rem;
 }
 
 .lead {
-    font-size: 1.25rem;
-    font-weight: 300;
+  font-family: 'Poppins', sans-serif;
+  font-size: 1.25rem;
+  color: var(--dark-silver);
 }
+
+/* Button Styles */
+.btn {
+  font-family: 'Poppins', sans-serif;
+  padding: 0.8rem 2rem;
+  border-radius: 50px;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: 600;
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-warning {
+  background: var(--gradient-bg);
+  border: none;
+  color: white;
+}
+
+.btn-warning:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(106, 27, 154, 0.4);
+  color: white;
+}
+
+.btn-success {
+  background: linear-gradient(135deg, #2e7d32, #43a047);
+  border: none;
+  color: white;
+}
+
+.btn-success:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(46, 125, 50, 0.4);
+}
+
+/* Auction Cards */
+.auction-card {
+  border-radius: 15px;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  border: none;
+  background: white;
+}
+
+.auction-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.auction-card .card-img-top {
+  transition: transform 0.5s ease;
+}
+
+.auction-card:hover .card-img-top {
+  transform: scale(1.05);
+}
+
+.auction-card .card-body {
+  padding: 1.5rem;
+}
+
+.auction-card .card-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.auction-card .card-text {
+  font-family: 'Poppins', sans-serif;
+  color: var(--dark-silver);
+  font-size: 1.1rem;
+}
+
+/* Logo Animation */
+.logo-img {
+  animation: float 6s ease-in-out infinite;
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+  .landing-header {
+    padding: 2rem !important;
+  }
+  
+  h1.display-4 {
+    font-size: 2.5rem;
+  }
+  
+  .lead {
+    font-size: 1.1rem;
+  }
+  
+  .btn {
+    padding: 0.6rem 1.5rem;
+  }
+  
+  .auction-card {
+    margin-bottom: 2rem;
+  }
+}
+
+/* Loading State Animation */
+@keyframes shimmer {
+  0% {
+    background-position: -468px 0;
+  }
+  100% {
+    background-position: 468px 0;
+  }
+}
+
+.loading {
+  animation: shimmer 1s linear infinite;
+  background: linear-gradient(to right, #f6f7f8 0%, #edeef1 20%, #f6f7f8 40%, #f6f7f8 100%);
+  background-size: 800px 104px;
+} 

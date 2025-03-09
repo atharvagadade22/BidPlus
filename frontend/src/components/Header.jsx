@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Navbar, Nav, Container, Button } from "react-bootstrap";
 import { useNavigate } from 'react-router-dom';
 import axios from "axios";
-import { alignPropType } from "react-bootstrap/esm/types";
+import '../styles/Header.css';
 
 const Header = ({ isLoggedIn, setIsLoggedIn }) => {
   const navigate = useNavigate();
@@ -38,35 +38,42 @@ const Header = ({ isLoggedIn, setIsLoggedIn }) => {
 
   return (
     <Navbar expand="lg" className="navbar shadow-sm py-2" variant="light">
-      <Container fluid>
-        <Navbar.Toggle aria-controls="basic-navbar-nav" />
-        <Navbar.Brand href="/" className="me-auto">
-          <img src="/logo.svg" alt="BidPlus Logo" className="logo-img"/>
-        </Navbar.Brand>
+      <Container fluid className="px-3">
+        <div className="d-flex justify-content-between align-items-center w-100">
+          <Navbar.Brand href="/" className="me-0">
+            <img src="/logo.svg" alt="BidPlus Logo" className="logo-img" style={{ maxHeight: '40px' }}/>
+          </Navbar.Brand>
+          
           {isLoggedIn && (
-            <img
-              src={profileImage || "/default-profile.png"}
-              alt="Profile"
-              className="rounded-circle profile-img mb-2"
-              width="40"
-              height="40"
-              onClick={() => navigate('/profile')}
-              style={{ cursor: 'pointer' }}
-            />
+            <div className="order-lg-3">
+              <img
+                src={profileImage ? `${process.env.REACT_APP_API_URL}/${profileImage}` : "/default-profile.png"}
+                alt="Profile"
+                className="rounded-circle profile-img"
+                width="40"
+                height="40"
+                onClick={() => navigate('/profile')}
+                style={{ cursor: 'pointer', objectFit: 'cover' }}
+              />
+            </div>
           )}
-        <Navbar.Collapse id="basic-navbar-nav" className="justify-content-center">
-          <Nav className="nav-links">
-            <Nav.Link href="/" className="nav-link-custom">Home</Nav.Link>
-            <Nav.Link href="/auctions" className="nav-link-custom">Auctions</Nav.Link>
+          
+          <Navbar.Toggle aria-controls="basic-navbar-nav" className="ms-2" />
+        </div>
+
+        <Navbar.Collapse id="basic-navbar-nav" className="mt-2 mt-lg-0">
+          <Nav className="mx-auto text-center">
+            <Nav.Link href="/" className="nav-link-custom px-3">Home</Nav.Link>
+            <Nav.Link href="/auctions" className="nav-link-custom px-3">Auctions</Nav.Link>
             {isLoggedIn ? (
               <>
-                <Nav.Link href="/post-auction" className="nav-link-custom">Post Auction</Nav.Link>
-                <Button variant="outline-danger" onClick={handleSignOut}>Sign Out</Button>
+                <Nav.Link href="/post-auction" className="nav-link-custom px-3">Post Auction</Nav.Link>
+                <Button variant="outline-danger" className="mt-2 mt-lg-0 mx-3" onClick={handleSignOut}>Sign Out</Button>
               </>
             ) : (
               <>
-                <Nav.Link href="/signin" className="nav-link-custom">Sign In</Nav.Link>
-                <Nav.Link href="/signup" className="btn btn-warning fw-bold px-3 ms-2 nav-link-custom">Sign Up</Nav.Link>
+                <Nav.Link href="/signin" className="nav-link-custom px-3">Sign In</Nav.Link>
+                <Nav.Link href="/signup" className="btn btn-warning fw-bold px-4 mt-2 mt-lg-0 mx-3">Sign Up</Nav.Link>
               </>
             )}
           </Nav>

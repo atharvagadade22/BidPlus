@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import AuctionList from '../components/AuctionList';
 import axios from 'axios';
-import 'bootstrap/dist/css/bootstrap.min.css'; 
+import 'bootstrap/dist/css/bootstrap.min.css';
+import '../styles/Auctions.css';
 
 const Auctions = () => {
   const [auctions, setAuctions] = useState([]);

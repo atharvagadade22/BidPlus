@@ -1,0 +1,121 @@
+/* Google Fonts Import */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Poppins:wght@300;400;500;600&display=swap');
+
+/* Main Container Styles */
+.signup-container {
+  background: linear-gradient(135deg, #f5f5f5 0%, #e6e6fa 100%);
+  min-height: 100vh;
+  padding: 2rem;
+}
+
+/* Card Styles */
+.signup-card {
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 15px;
+  border: none;
+  max-width: 450px;
+  width: 100%;
+  backdrop-filter: blur(10px);
+  transition: transform 0.3s ease;
+}
+
+.signup-card:hover {
+  transform: translateY(-5px);
+}
+
+/* Typography */
+.signup-title {
+  font-family: 'Playfair Display', serif;
+  color: #4a154b;
+  font-weight: 700;
+  font-size: 2.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.signup-label {
+  font-family: 'Poppins', sans-serif;
+  color: #2c1810;
+  font-weight: 500;
+  font-size: 0.9rem;
+}
+
+/* Input Fields */
+.signup-input {
+  font-family: 'Poppins', sans-serif;
+  padding: 0.8rem;
+  border-radius: 8px;
+  border: 1px solid #e0e0e0;
+  transition: all 0.3s ease;
+}
+
+.signup-input:focus {
+  border-color: #8a2be2;
+  box-shadow: 0 0 0 0.2rem rgba(138, 43, 226, 0.25);
+}
+
+/* Button Styles */
+.btn-primary {
+  background: linear-gradient(45deg, #8a2be2, #9370db);
+  border: none;
+  padding: 0.8rem;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+  background: linear-gradient(45deg, #9370db, #8a2be2);
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(138, 43, 226, 0.3);
+}
+
+.btn-primary:active {
+  transform: translateY(0);
+}
+
+/* Link Styles */
+.signup-link {
+  color: #8a2be2;
+  font-weight: 500;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.signup-link:hover {
+  color: #9370db;
+  text-decoration: underline;
+}
+
+/* Error Messages */
+.text-danger {
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.85rem;
+  color: #dc3545;
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive Adjustments */
+@media (max-width: 576px) {
+  .signup-card {
+    padding: 1.5rem !important;
+  }
+  
+  .signup-title {
+    font-size: 2rem;
+  }
+  
+  .signup-container {
+    padding: 1rem;
+  }
+} 

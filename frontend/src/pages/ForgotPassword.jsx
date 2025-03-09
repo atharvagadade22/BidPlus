@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import '../styles/ForgotPassword.css';
 
 const ForgotPassword = () => {
   const [email, setEmail] = useState('');
@@ -18,18 +19,10 @@ const ForgotPassword = () => {
   };
 
   return (
-    <div 
-      className="d-flex align-items-center justify-content-center vh-100" 
-      style={{ 
-        backgroundImage: "url('/forgot-password-bg.jpeg')",
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-      }}
-      
-    >
-      <div className="card p-4 shadow-lg" style={{ width: '400px', backgroundColor: 'rgba(255, 255, 255, 0.9)' }}>
-        <h3 className="text-center mb-3">Forgot Password</h3>
-        <p className="text-center">Enter your email address and we'll send you a link to reset your password.</p>
+    <div className="forgot-password-container d-flex align-items-center justify-content-center">
+      <div className="forgot-password-card">
+        <h3 className="forgot-password-title text-center">Forgot Password</h3>
+        <p className="forgot-password-text text-center">Enter your email address and we'll send you a link to reset your password.</p>
         <form onSubmit={handleSubmit}>
           <div className="mb-3">
             <label className="form-label">Email Address</label>
@@ -41,8 +34,8 @@ const ForgotPassword = () => {
               required 
             />
           </div>
-          <button type="submit" className="btn btn-primary w-100 mb-2">Send Reset Link</button>
-          <button type="button" className="btn btn-outline-secondary w-100" onClick={() => navigate('/signin')}>
+          <button type="submit" className="btn btn-reset w-100">Send Reset Link</button>
+          <button type="button" className="btn btn-back w-100" onClick={() => navigate('/signin')}>
             Back to Sign In
           </button>
         </form>

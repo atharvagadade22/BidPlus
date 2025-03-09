@@ -1,0 +1,161 @@
+/* Google Fonts Import */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Poppins:wght@300;400;500;600&display=swap');
+
+/* Custom Variables */
+:root {
+  --primary-purple: #6a1b9a;
+  --secondary-purple: #9c27b0;
+  --silver: #f5f5f5;
+  --silver-dark: #e0e0e0;
+}
+
+/* General Styles */
+.profile-container {
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(135deg, var(--silver) 0%, #ffffff 100%);
+  min-height: 100vh;
+  padding: 2rem 0;
+}
+
+.profile-heading {
+  font-family: 'Playfair Display', serif;
+  color: var(--primary-purple);
+  font-weight: 600;
+  position: relative;
+  margin-bottom: 2rem;
+}
+
+.profile-heading::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 50px;
+  height: 3px;
+  background: linear-gradient(to right, var(--primary-purple), var(--secondary-purple));
+}
+
+/* Profile Card Styles */
+.profile-card {
+  background: white;
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(106, 27, 154, 0.1);
+  transition: transform 0.3s ease;
+}
+
+.profile-card:hover {
+  transform: translateY(-5px);
+}
+
+/* Profile Image Styles */
+.profile-image-container {
+  position: relative;
+  margin-bottom: 2rem;
+}
+
+.profile-image {
+  border: 4px solid var(--silver);
+  box-shadow: 0 5px 15px rgba(106, 27, 154, 0.2);
+  transition: transform 0.3s ease;
+}
+
+.profile-image:hover {
+  transform: scale(1.05);
+}
+
+/* Settings Button Styles */
+.settings-button {
+  color: var(--primary-purple);
+  transition: all 0.3s ease;
+}
+
+.settings-button:hover {
+  color: var(--secondary-purple);
+  transform: rotate(90deg);
+}
+
+/* Dropdown Menu Styles */
+.profile-dropdown {
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+  border: none;
+}
+
+.dropdown-item {
+  font-family: 'Poppins', sans-serif;
+  padding: 0.75rem 1.5rem;
+  transition: all 0.3s ease;
+}
+
+.dropdown-item:hover {
+  background: linear-gradient(45deg, var(--primary-purple), var(--secondary-purple));
+  color: white;
+}
+
+/* Form Styles */
+.profile-form {
+  padding: 1.5rem;
+}
+
+.form-control {
+  border: 2px solid var(--silver-dark);
+  border-radius: 8px;
+  padding: 0.75rem;
+  transition: all 0.3s ease;
+}
+
+.form-control:focus {
+  border-color: var(--secondary-purple);
+  box-shadow: 0 0 0 0.2rem rgba(156, 39, 176, 0.25);
+}
+
+/* Button Styles */
+.profile-btn {
+  background: linear-gradient(45deg, var(--primary-purple), var(--secondary-purple));
+  border: none;
+  border-radius: 25px;
+  padding: 0.75rem 2rem;
+  color: white;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  transition: all 0.3s ease;
+}
+
+.profile-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(106, 27, 154, 0.3);
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+  .profile-container {
+    padding: 1rem;
+  }
+  
+  .profile-card {
+    margin: 0 1rem;
+  }
+  
+  .profile-image {
+    width: 120px;
+    height: 120px;
+  }
+}
+
+/* Animation Keyframes */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.profile-card {
+  animation: fadeIn 0.5s ease-out;
+} 

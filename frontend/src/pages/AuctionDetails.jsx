@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import '../styles/AuctionDetails.css';
 
 const AuctionDetails = () => {
   const [auction, setAuction] = useState(null);
@@ -77,27 +78,28 @@ const AuctionDetails = () => {
   };
 
   if (error) {
-    return <div className="container mt-5 text-center text-danger">{error}</div>;
+    return <div className="auction-container loading-container text-danger">{error}</div>;
   }
 
   if (!auction) {
-    return <div className="container mt-5 text-center">Loading...</div>;
+    return <div className="auction-container loading-container">Loading...</div>;
   }
 
   return (
-    <div className="container mt-5">
+    <div className="auction-container">
       <div className="row">
         <div className="col-md-6">
-          <img
-            src={auction.image ? `${process.env.REACT_APP_API_URL}/${auction.image}` : '/default-auction.png'}
-            alt={auction.item}
-            className="img-fluid rounded"
-            style={{ maxHeight: '400px', objectFit: 'cover' }}
-          />
+          <div className="auction-image-container">
+            <img
+              src={auction.image ? `${process.env.REACT_APP_API_URL}/${auction.image}` : '/default-auction.png'}
+              alt={auction.item}
+              className="auction-image"
+            />
+          </div>
         </div>
         <div className="col-md-6">
-          <h2 className="mb-4">{auction.item}</h2>
-          <div className="card">
+          <h2 className="auction-title">{auction.item}</h2>
+          <div className="auction-details-card">
             <div className="card-body">
               <p className="card-text"><strong>Starting Bid:</strong> ${auction.startingBid}</p>
               <p className="card-text"><strong>Current Bid:</strong> ${auction.currentBid}</p>
@@ -105,7 +107,7 @@ const AuctionDetails = () => {
               <p className="card-text"><strong>Auction Ends:</strong> {new Date(auction.endTime).toLocaleString()}</p>
               
               {isLoggedIn && (
-                <form onSubmit={handleBid} className="mt-4">
+                <form onSubmit={handleBid} className="bid-form">
                   <div className="form-group">
                     <label htmlFor="bidAmount">Place your bid ($):</label>
                     <input
@@ -122,14 +124,14 @@ const AuctionDetails = () => {
                       required
                     />
                     {parseFloat(bidAmount) <= auction.currentBid && (
-                      <small className="text-danger">
+                      <small className="error-text">
                         Bid amount must be greater than ${auction.currentBid}
                       </small>
                     )}
                   </div>
                   <button 
                     type="submit" 
-                    className="btn btn-primary mt-3"
+                    className="bid-button"
                     disabled={parseFloat(bidAmount) <= auction.currentBid}
                   >
                     Place Bid
@@ -138,8 +140,8 @@ const AuctionDetails = () => {
               )}
               
               {!isLoggedIn && (
-                <div className="alert alert-info mt-3">
-                  Please <button onClick={() => navigate('/signin')} className="btn btn-link p-0">sign in</button> to place a bid
+                <div className="signin-alert">
+                  Please <button onClick={() => navigate('/signin')} className="btn-link">sign in</button> to place a bid
                 </div>
               )}
             </div>
